@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "taskriz",
+  "version": "0.1.0",
+  "description": "Send a person a request through Taskriz, an interface they answer in the app, browser or by email, and read their answer.",
+  "author": {
+    "name": "Appeggio",
+    "url": "https://www.taskriz.com"
+  },
+  "homepage": "https://www.taskriz.com",
+  "repository": "https://github.com/appeggio-com/taskriz-chatgpt-plugin",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Taskriz",
+        "shortDescription": "Ask a person for something and act on their answer",
+        "developerName": "Appeggio",
+        "category": "Productivity",
+        "websiteURL": "https://www.taskriz.com"
+      }
+    }
+  }
+}
