@@ -33,3 +33,4 @@ You need a Taskriz account.
 - `plugins/taskriz/mcp.json`: the Taskriz MCP server (currently `https://dev.taskriz.com/mcp`),
   signing in with OAuth (dynamic client registration).
 - `plugins/taskriz/skills/taskriz/SKILL.md`: when and how ChatGPT uses it.
+- `plugins/taskriz/assets/`: the icon (`icon.png`, 192×192) and logo (`logo.png`, 512×512).

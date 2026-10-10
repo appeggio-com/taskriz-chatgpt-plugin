@@ -16,7 +16,9 @@
         "shortDescription": "Ask a person for something and act on their answer",
         "developerName": "Appeggio",
         "category": "Productivity",
-        "websiteURL": "https://www.taskriz.com"
+        "websiteURL": "https://www.taskriz.com",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
       }
     }
   }
