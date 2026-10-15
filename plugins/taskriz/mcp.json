@@ -3,7 +3,7 @@
   "mcpServers": {
     "taskriz": {
       "type": "streamable-http",
-      "url": "https://dev.taskriz.com/mcp",
+      "url": "https://www.taskriz.com/mcp",
       "extensions": {
         "com.openai": {
           "auth": {
