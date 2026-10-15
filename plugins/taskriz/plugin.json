@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "taskriz",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Send a person a request through Taskriz, an interface they answer in the app, browser or by email, and read their answer.",
   "author": {
     "name": "Appeggio",
@@ -13,13 +13,73 @@
     "com.openai": {
       "interface": {
         "displayName": "Taskriz",
-        "shortDescription": "Ask a person for something and act on their answer",
+        "shortDescription": "Ask people, act on answers",
         "developerName": "Appeggio",
         "category": "Productivity",
         "websiteURL": "https://www.taskriz.com",
         "composerIcon": "./assets/icon.png",
-        "logo": "./assets/logo.png"
+        "logo": "./assets/logo.png",
+        "longDescription": "Taskriz gives your Agent a simple, secure way to involve people. Ask someone for a decision, information or an action: Taskriz turns the request into an interface they answer in the Taskriz app, in their browser or from an email, and their structured answer comes straight back.\n\nWith the Taskriz plugin, ChatGPT and Codex can create an Agent, invite people with a pairing code or by email, design a request with fields, choices, dates and photo or document pickers, check how it looks, send it, and read the replies, including any files people attach. People can decline, and a request can be withdrawn when it's no longer needed.\n\nSign in with your Taskriz account; there's a Free plan to start. The people you ask never pay, and they don't need to install an app.",
+        "supportURL": "https://www.taskriz.com/support/",
+        "privacyPolicyURL": "https://www.taskriz.com/privacy/",
+        "termsOfServiceURL": "https://www.taskriz.com/terms/"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Ask a colleague to approve an invoice",
+              "prompt": "Ask sam@example.com whether to approve invoice #4567 for $1,200, with an optional note.",
+              "tools_triggered": "list_agents, get_ui_guide, check_ui, send_request",
+              "expected_behavior": "Designs a request with the invoice details, Approve and Reject buttons and an optional note field, checks it with check_ui, sends it to sam@example.com and reports that it was sent."
+            },
+            {
+              "description": "Read the answers that came back",
+              "prompt": "Have any of the people I asked replied yet?",
+              "tools_triggered": "get_replies, acknowledge",
+              "expected_behavior": "Reads the replies, summarises each person's answer (or says none have arrived yet), and acknowledges the replies it has handled."
+            },
+            {
+              "description": "Set up an Agent and invite people to it",
+              "prompt": "Create a Taskriz Agent called Office Manager and give me a code so my team can start receiving its requests.",
+              "tools_triggered": "create_agent, pairing_code",
+              "expected_behavior": "Creates the Office Manager Agent and returns a one-time pairing code with its link and QR code, explaining that it is valid for 24 hours."
+            },
+            {
+              "description": "Ask the team to choose a time slot",
+              "prompt": "Ask my team to pick a delivery slot next Tuesday between 9am and 5pm, in 30-minute slots.",
+              "tools_triggered": "list_agents, list_recipients, get_ui_guide, check_ui, send_request",
+              "expected_behavior": "Finds the team's recipients, designs a request with a time picker limited to 9am-5pm in 30-minute steps, checks it and sends it to them."
+            },
+            {
+              "description": "Withdraw a request that's no longer needed",
+              "prompt": "Withdraw the invoice request I sent to Sam; it has been paid.",
+              "tools_triggered": "recall_request",
+              "expected_behavior": "Withdraws the request so it leaves Sam's Taskriz, and confirms it was withdrawn."
+            }
+          ],
+          "negative": [
+            {
+              "description": "A general knowledge question: there is no person to ask",
+              "prompt": "What is the capital of France?"
+            },
+            {
+              "description": "A coding task the assistant does itself: nothing to ask a person",
+              "prompt": "Write a Python function that sorts a list of numbers."
+            },
+            {
+              "description": "The person to ask is the user in this chat: ask them directly, not through Taskriz",
+              "prompt": "Which colour should the chart be? Ask me and then draw it."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": ""
+      },
+      "publication": {
+        "release_notes": "First public release: create Agents, invite people, design and check requests, send them, read replies and files, and withdraw requests. Connects to Taskriz production (https://www.taskriz.com/mcp) with OAuth sign-in."
       }
     }
-  }
+  },
+  "license": "MIT"
 }
